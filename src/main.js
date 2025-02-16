@@ -1,4 +1,5 @@
-import './assets/main.css'
+import './assets/styles.css';
+import 'https://code.jquery.com/jquery-3.7.1.min.js';
 
 import { createApp } from 'vue'
 import App from './App.vue'

@@ -81,10 +81,11 @@ textarea:not([rows]) {
 
 body{
   font-family: "Source Code Pro", serif;
-    background:#31363f;
-    background:url('./imgs/c2c9362d-eb52-47ce-a0df-ae58b0e40ae3.png') no-repeat;
-    background-size:contain;
-    backdrop-filter:blur(10px) opacity(1);
+    /* background:#31363f; */
+    /* background:url('./imgs/c2c9362d-eb52-47ce-a0df-ae58b0e40ae3.png') no-repeat;
+    background-size:cover;
+    backdrop-filter:blur(10px) opacity(1) !important;
+    -webkit-backdrop-filter: blur(10px) opacity(1) !important; */
     margin:0;
     user-drag:none !important;
 }
