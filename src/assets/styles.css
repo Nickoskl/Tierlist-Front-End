@@ -118,9 +118,10 @@ input:focus{
 }
 
 .header_btn{
-    width:32%;
-    display:inline-block;
-    transition:all 0.3s;
+  width:25% !important;
+  width:auto;
+  display:inline-block;
+  transition:all 0.3s;
 }
 
 .header_btn:hover{
