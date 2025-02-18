@@ -750,6 +750,7 @@ footer{
   margin:0;
   font-size:30px;
   text-align:center;
+  color:#d0d0d2;
 }
 
 .login_img{
@@ -788,18 +789,21 @@ footer{
   width:100%;
 }
 
-.login_info h5{
+.login_info button{
   background:#d0d0d2;
   font-size:20px;
+  font-weight:700;
   margin:0;
   color:#31363f;
-  padding:4% 4%;
+  padding:4% 30%;
   margin:5% 0;
+  display:block;
   transition:all 0.3s;
   border-radius:5px;
+  border:none;
 }
 
-.login_info h5:hover{
+.login_info button:hover{
   transform:scale(1.1);
   box-shadow:10px 10px 10px rgba(0,0,0,0.2);
   transition:all 0.3s;

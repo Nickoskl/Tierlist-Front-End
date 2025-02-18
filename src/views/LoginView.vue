@@ -1,6 +1,16 @@
 <script setup>
+import { reactive } from 'vue';
+import {useAuthStore} from '../stores/auth';
+import {storeToRefs} from 'pinia';
+
+const {errors,status} = storeToRefs(useAuthStore());
+const {authenticate} = useAuthStore();
 
 
+const formData = reactive({
+    email: '',
+    password: ''
+})
 
 
 
@@ -18,9 +28,18 @@
                 <img src="../assets/icons/male-icon.svg" alt="">
             </div>
             <div class="login_info">
-                <input placeholder="Email " type="text">
-                <input placeholder="Password" type="text">
-                <h5 class="pointer">Login</h5>
+                <form @submit.prevent="authenticate('/user/login', formData)">
+                    <input v-model="formData.email" placeholder="Email " type="text" />
+                    <input v-model="formData.password" placeholder="Password" type="password" />
+                    <button  class="pointer">Login</button>
+                </form>
+
+            </div>
+            <div v-if="status!==200 && status">
+                <h5>Something Wrong, User {{ errors.data }}</h5>
+            </div>
+            <div v-if="status==200 && status">
+                Success, Redirecting ...
             </div>
         </div>
 

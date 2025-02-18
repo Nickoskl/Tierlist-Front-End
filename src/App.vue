@@ -1,26 +1,39 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { reactive,ref, onMounted,onUpdated,watchEffect } from 'vue';
-import cookies from 'vue-cookies';
+import { reactive,ref, onMounted,onUpdated,watchEffect,watch } from 'vue';
 import NavHeader from './components/NavHeader.vue';
 import AdminMenu from './components/AdminMenu.vue';
 import NavFooter from './components/NavFooter.vue';
+import { useAuthStore } from './stores/auth';
+import {storeToRefs} from 'pinia';
+import cookie from 'vue-cookies';
+
+const {authenticate} = useAuthStore();
+const {error,status,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
 
 const hasCookie = ref($cookies.get('user_auth'));
 
-const userAuth = reactive({
-  isLoggedIn: Boolean,
-  userCookie: String,
-  userID:Number,
-  userName:Number,
-  userSuper:Boolean
+onMounted(async()=>{
+  if(cookie.get('user_auth')){
+    await authenticate('/user/login',0)
+  }
 })
 
-const homeActions = reactive({
-  userSign: String,
-  btnWidth: Number
-})
+// watchEffect(() => {
+//   hasCookie.value = cookie.get('user_auth');
+// });
 
+// watch(hasCookie, async (newValue, oldValue) => {
+//   if (newValue !== oldValue) {
+//     console.log('Cookie value changed:', newValue);
+//     if (newValue) {
+//       await authenticate('/user/login', 0);
+//     } else {
+//       // Handle cookie deletion or other actions
+//       console.log('Cookie deleted');
+//     }
+//   }
+// });
 </script>
 
 <template>
@@ -41,11 +54,11 @@ const homeActions = reactive({
         <button>Upload PNG or JPG up to 10 MB</button>
     </form> -->
     <!-- <img src="http://localhost:5000/img/44158.png" alt=""> -->
-    <NavHeader />
+    <NavHeader :user="userID" />
     <div class="middle_title">
         <h3>TIERLIST</h3>
     </div>
-    <AdminMenu />
+    <AdminMenu v-if="userSuper" />
     <div class="main">
 
     <RouterView />
