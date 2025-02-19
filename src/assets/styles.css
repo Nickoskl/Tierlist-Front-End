@@ -156,6 +156,7 @@ input:focus{
     color:#d0d0d2;
     font-weight: 800;
     letter-spacing:1.3vw;
+
 }
 
 .middle_title h3{
@@ -304,6 +305,7 @@ footer{
 
 .admin_menu_item h5{
   display:inline-block;
+  color:#d0d0d2;
 }
 
 .admin_menu_item img{
@@ -598,7 +600,8 @@ footer{
 .user_btn{
   background:#31363f;
   display:inline-block;
-  padding:0 4%;
+  padding:0 3%;
+  margin: 0 1%;
   border-radius:5px;
   transition:all 0.3s;
   color:#d0d0d2;
@@ -621,7 +624,7 @@ footer{
 
 .user_btn img{
   width:30px;
-
+  margin:10px;
   display:inline-block;
   vertical-align:middle;
 }

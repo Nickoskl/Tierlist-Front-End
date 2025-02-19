@@ -1,7 +1,9 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive,watchEffect } from 'vue';
 import {useAuthStore} from '../stores/auth';
 import {storeToRefs} from 'pinia';
+import { onMounted } from 'vue';
+import { onUpdated } from 'vue';
 
 const {errors,status} = storeToRefs(useAuthStore());
 const {authenticate} = useAuthStore();
@@ -11,6 +13,7 @@ const formData = reactive({
     email: '',
     password: ''
 })
+
 
 
 
@@ -28,18 +31,18 @@ const formData = reactive({
                 <img src="../assets/icons/male-icon.svg" alt="">
             </div>
             <div class="login_info">
-                <form @submit.prevent="authenticate('/user/login', formData)">
+                <form @submit.prevent=" authenticate(formData)">
                     <input v-model="formData.email" placeholder="Email " type="text" />
                     <input v-model="formData.password" placeholder="Password" type="password" />
                     <button  class="pointer">Login</button>
                 </form>
 
             </div>
-            <div v-if="status!==200 && status">
-                <h5>Something Wrong, User {{ errors.data }}</h5>
+            <div v-if="typeof status == 'number' && status!==200">
+                <h5>Incorrect Credentials, {{ errors.data }}</h5>
             </div>
-            <div v-if="status==200 && status">
-                Success, Redirecting ...
+            <div v-if="status==200">
+                Success 😎, Redirecting ...
             </div>
         </div>
 

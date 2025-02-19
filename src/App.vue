@@ -14,9 +14,9 @@ const {error,status,userName,userID,userToken,userSuper,userEmail} = storeToRefs
 const hasCookie = ref($cookies.get('user_auth'));
 
 onMounted(async()=>{
-  if(cookie.get('user_auth')){
-    await authenticate('/user/login',0)
-  }
+  // if(cookie.get('user_auth')){
+  //   await authenticate('/user/login',0);
+  // }
 })
 
 // watchEffect(() => {

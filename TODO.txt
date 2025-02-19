@@ -8,4 +8,3 @@
 |__/|__/   |__/   \______/ |_______/  \______/ |__/|__/
             
 # Continue with the html to VUE conversion
-# Better integration with request to API

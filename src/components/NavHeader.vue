@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink, stringifyQuery } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+
+const authenticated = useAuthStore();
 
 defineProps({
     user:{
@@ -16,10 +19,10 @@ defineProps({
             <img src="../assets/icons/home-svgrepo-com.svg" alt="" class="header_icon">
             <h5 class="header_btn_text">Home</h5>
         </RouterLink>
-        <div v-if="user" class="pointer header_btn">
+        <RouterLink :to="{name : 'me'}"v-if="user" class="pointer header_btn">
             <img src="../assets/icons/male-icon.svg" alt="" class="header_icon">
-            <h5 class="header_btn_text">User</h5>
-        </div>
+            <h5 class="header_btn_text">Me</h5>
+        </RouterLink>
         <div v-if="user" class="pointer header_btn">
             <img src="../assets/icons/pencil-icon.svg" alt="" class="header_icon">
             <h5 class="header_btn_text">My lists</h5>

@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import TierCard from './TierCard.vue';
 
 defineProps({

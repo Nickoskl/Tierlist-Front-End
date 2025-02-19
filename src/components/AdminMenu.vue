@@ -1,5 +1,5 @@
 <script setup>
-
+import { RouterLink } from 'vue-router';
 
 </script>
 
@@ -13,10 +13,10 @@
             <img src="../assets/icons/plus-icon.svg" alt="">
             <h5>New Template</h5>
         </div>
-        <div class="pointer admin_menu_item">
+        <RouterLink :to="{name:'users'}" class="pointer admin_menu_item">
             <img src="../assets/icons/male-icon.svg" alt="">
             <h5>Users</h5>
-        </div>
+        </RouterLink>
     </div>
 
 </template>
