@@ -9,7 +9,7 @@ import {storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
 
 const {authenticate} = useAuthStore();
-const {error,status,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
+const {error,status,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
 
 const hasCookie = ref($cookies.get('user_auth'));
 
@@ -54,7 +54,7 @@ onMounted(async()=>{
         <button>Upload PNG or JPG up to 10 MB</button>
     </form> -->
     <!-- <img src="http://localhost:5000/img/44158.png" alt=""> -->
-    <NavHeader :user="userID" />
+    <NavHeader />
     <div class="middle_title">
         <h3>TIERLIST</h3>
     </div>

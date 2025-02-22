@@ -568,11 +568,12 @@ footer{
 
 .user_card{
   width:90%;
-  text-align:center;
+  text-align:left;
   margin:1% auto;
   background:#222831;
-  padding:2%;
+  padding:2% 3%;
   border-radius:5px;
+  vertical-align:middle;
 }
 
 .user_info{
@@ -600,11 +601,12 @@ footer{
 .user_btn{
   background:#31363f;
   display:inline-block;
-  padding:0 3%;
-  margin: 0 1%;
+  padding:0 2%;
+  margin: auto 1%;
   border-radius:5px;
   transition:all 0.3s;
   color:#d0d0d2;
+  width:130px;
 }
 .user_btn:hover{
   transition:all 0.3s;
@@ -624,7 +626,7 @@ footer{
 
 .user_btn img{
   width:30px;
-  margin:10px;
+  margin:8px;
   display:inline-block;
   vertical-align:middle;
 }
@@ -637,7 +639,7 @@ footer{
 }
 
 .profile_card{
-  padding:6% 4%;
+  padding:3% 0;
   color:#d0d0d2;
 }
 
@@ -699,7 +701,7 @@ footer{
   display:inline-block;
   background:#222831;
   width:40%;
-  padding:5% 3%;
+  padding:3% 3%;
   border-radius:10px;
   vertical-align:top;
 }
@@ -717,15 +719,19 @@ footer{
 .session_ip{
   display:inline-block;
   background:#31363f;
-  width:80%;
-  padding:5%;
+  width:70%;
+  margin-right:10px;
+  padding:1% 5%;
   border-radius:10px;
+  vertical-align:middle;
 }
 
 .session_card h5{
   display:inline-block;
-  margin:0;
+  margin:2px;
   padding:0 10%;
+  background:rgba(0,0,0,0.2);
+  border-radius:8px;
 }
 
 .session_card img{
@@ -738,10 +744,16 @@ footer{
   display:inline-block;
   padding:1%;
   transition:all 0.3s;
+  background:#31363f;
+  border-radius:10px;
 }
 .session_out:hover{
   transform:scale(1.1);
   transition:all 0.3s;
+}
+
+.session_out img{
+  margin:10px;
 }
 
 .login_title{

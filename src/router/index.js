@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/HomeView.vue';
 import Login from '../views/LoginView.vue';
 import Logout from '../views/LogoutView.vue'
-import Me from '../views/ProfileView.vue'
+import UserProfile from '../views/ProfileView.vue'
 import Users from '../views/UsersView.vue'
+import Register from '../views/RegisterVIew.vue'
 import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
 
@@ -22,15 +23,21 @@ const router = createRouter({
       meta:{loggedIn : false}
     },
     {
+      path: '/register',
+      name: 'register',
+      component: Register,
+      meta:{loggedIn : false}
+    },
+    {
       path: '/logout',
       name: 'logout',
       component: Logout,
       meta:{loggedIn:true}
     },
     {
-      path: '/me',
-      name: 'me',
-      component: Me,
+      path: '/user/:id',
+      name: 'user',
+      component: UserProfile,
       meta:{loggedIn:true}
     },
     {
@@ -64,6 +71,7 @@ router.beforeEach(async(to,from)=>{
   if (to.meta.loggedIn && authenticated.userLoggedIn!==to.meta.loggedIn){
     return {name:'home'}
   }
+
 
 })
 

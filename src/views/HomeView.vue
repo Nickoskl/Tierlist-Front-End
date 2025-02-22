@@ -1,5 +1,5 @@
 <script setup>
-import CardWrapper from '@/components/CardSection.vue';
+import CardSection from '@/components/CardSection.vue';
 
 
 
@@ -9,8 +9,8 @@ import CardWrapper from '@/components/CardSection.vue';
 
 
 
-        <CardWrapper title="Our Templates" :cardNum=3 />
-        <CardWrapper title="User TierLists" :cardNum=6 />
+        <CardSection title="Our Templates" :cardNum=3 />
+        <CardSection title="User TierLists" :cardNum=6 />
 
 
 </template>

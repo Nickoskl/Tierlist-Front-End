@@ -32,8 +32,8 @@ const formData = reactive({
             </div>
             <div class="login_info">
                 <form @submit.prevent=" authenticate(formData)">
-                    <input v-model="formData.email" placeholder="Email " type="text" />
-                    <input v-model="formData.password" placeholder="Password" type="password" />
+                    <input required="true" v-model="formData.email" placeholder="Email " type="text" />
+                    <input required="true" v-model="formData.password" placeholder="Password" type="password" />
                     <button  class="pointer">Login</button>
                 </form>
 
