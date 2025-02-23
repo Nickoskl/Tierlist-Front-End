@@ -46,14 +46,6 @@ const router = createRouter({
       component: Users,
       meta:{loggedIn:true}
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(''),
-    // },
   ],
 })
 
@@ -67,8 +59,10 @@ router.beforeEach(async(to,from)=>{
     await authenticate(0);
     console.log("HIT");
   }
-
-  if (to.meta.loggedIn && authenticated.userLoggedIn!==to.meta.loggedIn){
+  // console.log(to.meta.loggedIn)
+  // console.log(authenticated.userLoggedIn)
+  // console.log()
+  if (typeof to.meta.loggedIn !== "undefined" && authenticated.userLoggedIn!==to.meta.loggedIn){
     return {name:'home'}
   }
 

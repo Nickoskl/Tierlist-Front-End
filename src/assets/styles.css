@@ -661,6 +661,13 @@ footer{
   width:100%;
 }
 
+.profile_info h3{
+  font-weight:400;
+  padding:4% 0;
+  font-size:23px;
+}
+
+
 .profile_btn{
   width:100%;
   display:inline-block;
@@ -706,10 +713,13 @@ footer{
   vertical-align:top;
 }
 
-.profile_sessions h5{
+.profile_sessions h3{
   margin:0;
-  padding:3%;
-  font-weight:500
+  padding:0 5%;
+  padding-bottom:3% ;
+  text-align:center;
+  font-weight:500;
+  font-size:25px;
 }
 
 .session_card{

@@ -86,6 +86,48 @@ export const useAuthStore = defineStore('authStore',{
                 }
             }
         },
+        async register(formData){
+
+            var resp =''
+
+
+            try{
+
+                resp = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_REGISTER}`, formData).catch((error)=>{
+
+
+                    this.errors = error.response;
+                    this.status = error.response.status;
+
+                })
+
+            }catch(error){
+
+                console.error('An error occurred:', error.response ? error.response.data : error.message);
+
+            }finally{
+
+
+                if(resp){
+
+                    this.status = resp.status;
+
+
+                    setTimeout(()=>{
+                        this.router.push({name:'login'});
+                        this.status = '';
+                        this.errors = '';
+                    },1000)
+                    
+
+
+                }
+
+
+            }
+
+            
+        },
         reset(){
             this.status = '';
             this.errors = '';

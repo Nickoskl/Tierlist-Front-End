@@ -26,10 +26,10 @@ defineProps({
                     <img src="../assets/icons/eye-svgrepo-com.svg" alt="">
                     <h5>View</h5>
                 </RouterLink>
-                <div class="pointer user_btn">
+                <RouterLink :to="{ name: 'user', params: { id: user.ID},query:{edit: true }}" class="pointer user_btn">
                     <img src="../assets/icons/pencil-icon.svg" alt="">
                     <h5>Edit</h5>
-                </div>
+                </RouterLink>
                 <div class="pointer user_btn">
                     <img src="../assets/icons/close-square-icon.svg" alt="">
                     <h5>Delete</h5>

@@ -10,6 +10,7 @@ import { useAuthStore } from '@/stores/auth';
 import {ref} from 'vue'
 
 
+const editMode = ref(false);
 const editable = ref(false);
 const userData = ref([]);
 
@@ -30,7 +31,17 @@ onMounted(async()=>{
         editable.value = true;
     }
 
+    if(route.query.edit == 'true'&&editable.value==true){
+        editMode.value=true;
+    }
+
+
+    // editMode.value = route.query.editMode == 'true';
+  console.log('Edit Mode:', editMode.value);
+
 })
+
+
 
 </script>
 
@@ -38,7 +49,7 @@ onMounted(async()=>{
 
     <!-- <h1>{{ data[0]}}</h1> -->
 
-<UserInfoSection :user="userData" :edit="editable" />
+<UserInfoSection :user="userData" :editPerm="editable" :editModeImp="editMode" />
 
 <CardSection title="User TierLists" :cardNum=6 />
 

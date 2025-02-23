@@ -2,8 +2,6 @@
 import { reactive,watchEffect } from 'vue';
 import {useAuthStore} from '../stores/auth';
 import {storeToRefs} from 'pinia';
-import { onMounted } from 'vue';
-import { onUpdated } from 'vue';
 
 const {errors,status} = storeToRefs(useAuthStore());
 const {authenticate} = useAuthStore();
