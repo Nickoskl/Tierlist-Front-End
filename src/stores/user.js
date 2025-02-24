@@ -153,7 +153,90 @@ export const useUserStore = defineStore('userStore',{
 
                     this.status = resp.status;
                     this.user[0]={
-                        token
+                        //TODO
+                    }
+                    console.log(this.status);
+
+
+
+                }
+
+            }
+
+
+        },
+        async editUser(id,formData){
+
+            var resp='';
+
+            try{
+
+                const credentials = {
+                    email:formData.email,
+                    password_new: formData.passNew,
+                    password_old: formData.passOld,
+                    username: formData.username,
+                    img: formData.img,
+                }
+
+                axios.defaults.withCredentials = true;
+                resp = await axios.patch(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_EDIT_USER}${id}`, credentials).catch((error)=>{
+                    this.errors = error.response;
+                    this.status = error.response.status;
+                    console.log(error);
+                })
+
+
+
+            }catch(error){
+
+                console.error('An error occurred:', error.response ? error.response.data : error.message);
+
+            }finally{
+
+                if(resp){
+
+                    this.status = resp.status;
+                    this.user[0]={
+                        //TODO
+                    }
+                    console.log(this.status);
+
+
+
+                }
+
+            }
+
+
+        },
+        async deleteUser(id){
+
+            var resp='';
+
+            try{
+
+
+                axios.defaults.withCredentials = true;
+                resp = await axios.delete(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_DELETE_USER}${id}`).catch((error)=>{
+                    this.errors = error.response;
+                    this.status = error.response.status;
+                    console.log(error);
+                })
+
+
+
+            }catch(error){
+
+                console.error('An error occurred:', error.response ? error.response.data : error.message);
+
+            }finally{
+
+                if(resp){
+
+                    this.status = resp.status;
+                    this.user[0]={
+                        //TODO
                     }
                     console.log(this.status);
 

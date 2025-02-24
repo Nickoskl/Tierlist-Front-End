@@ -6,6 +6,8 @@
            | $$  | $$  | $$| $$  | $$| $$  | $$        
  /$$ /$$   | $$  |  $$$$$$/| $$$$$$$/|  $$$$$$/ /$$ /$$
 |__/|__/   |__/   \______/ |_______/  \______/ |__/|__/
-            
+
 # Continue with the html to VUE conversion
-#refresh profile with new data after sessionout
+# Refresh profile with new data after userDelete,userSessionout, and edit
+# Add loading animation
+# Add image uploading

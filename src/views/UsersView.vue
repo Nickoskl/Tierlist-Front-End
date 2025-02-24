@@ -25,7 +25,7 @@ onMounted(async()=>{
 
 
         <div class="admin_userlist">
-            <UserCard v-for="card in user" :user="card" />
+            <UserCard v-for="card in user" :userIt="card" />
         </div>
 
 

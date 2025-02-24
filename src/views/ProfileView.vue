@@ -17,7 +17,7 @@ const userData = ref([]);
 const route = useRoute();
 
 const {getUser} = useUserStore();
-const {user,status,errors} = storeToRefs(useUserStore())
+const {user,status:profineViewstatus} = storeToRefs(useUserStore())
 
 const authenticated = useAuthStore();
 const {authenticate} = useAuthStore();

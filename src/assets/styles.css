@@ -576,6 +576,10 @@ footer{
   vertical-align:middle;
 }
 
+.user_card h5{
+  color:#d0d0d2;
+}
+
 .user_info{
   display:inline-block;
   color:#d0d0d2;
@@ -676,6 +680,8 @@ footer{
   padding:4% 2%;
   margin:2% 0;
   transition:all 0.3s;
+  color:#d0d0d2;
+  border:none;
   border-radius:10px;
   font-size:20px;
 }
