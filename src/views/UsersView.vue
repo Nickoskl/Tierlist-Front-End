@@ -5,13 +5,14 @@ import { onMounted } from 'vue';
 import UserCard from '../components/UserCard.vue'
 
 const {getUsers} = useUserStore();
-const {user,errors,status} = storeToRefs(useUserStore());
+const {user,errors,status,loadingDone} = storeToRefs(useUserStore());
 
 
 
 onMounted(async()=>{
 
     await getUsers();
+
 
 })
 
@@ -22,6 +23,14 @@ onMounted(async()=>{
 
 <template>
 
+    
+        <div v-if="!loadingDone">
+            <h3>LOADING</h3>
+        </div>
+
+        <div v-if="errors">
+            <h3>{{errors.data}}</h3>
+        </div>
 
 
         <div class="admin_userlist">

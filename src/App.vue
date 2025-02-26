@@ -7,17 +7,37 @@ import NavFooter from './components/NavFooter.vue';
 import { useAuthStore } from './stores/auth';
 import {storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
+import { useUserStore } from './stores/user';
+
+// const {userStatus,authStatus} = ref('')
 
 const {authenticate} = useAuthStore();
-const {error,status,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
+const {error:authErrors,status:authStatus,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
+const {error:userErrors,status:userStatus} = storeToRefs(useUserStore);
 
 const hasCookie = ref($cookies.get('user_auth'));
 
 onMounted(async()=>{
-  // if(cookie.get('user_auth')){
-  //   await authenticate('/user/login',0);
-  // }
-})
+
+console.log("TESTESTESTSET")
+
+  });
+
+
+
+// })
+
+// watch([userStatus, authStatus], async ([newUserStatus, newAuthStatus]) => {
+//   console.log(newUserStatus)
+//   console.log(newAuthStatus)
+
+//   if(newUserStatus==403||newAuthStatus==403){
+//       cookie.remove('user_auth');
+//       this.router.push({name:'home'});
+//       console.log("ERROR 403")
+//     }
+
+// })
 
 // watchEffect(() => {
 //   hasCookie.value = cookie.get('user_auth');

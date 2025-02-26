@@ -1,6 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
-import { computed } from 'vue';
+import { computed,ref } from 'vue';
 import cookie from 'vue-cookies';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
@@ -8,6 +7,8 @@ import { storeToRefs } from 'pinia';
 const {logoutUser} = useUserStore();
 const {status,errors,user} = storeToRefs(useUserStore());
 
+const logOutUserStatus=ref('');
+const logOutUserErrors=ref('');
 
 const props = defineProps({
     session:{
@@ -19,6 +20,16 @@ const props = defineProps({
         required:true
     }
 })
+
+const handleLogOutUser= async()=>{
+
+    await logoutUser(props.id,props.session.token);
+
+    logOutUserStatus.value = status;  
+    logOutUserErrors.value = errors.data;  
+
+
+}
 
 
 
@@ -32,15 +43,17 @@ const formattedDate = computed(() => {
 <template>
 
 
-                <div class="session_card" :style="user[0].token==session.token?'display:none':''" :title="'Token: '+session.token">
+                <div class="session_card" :title="'Token: '+session.token">
                     <div :class="session.token == cookie.get('user_auth')? 'thisSession session_ip':'session_ip'">
                         <img src="../assets/icons/monitor-icon.svg" alt="">
                         <div style="text-align: center;display: inline-block;width:70%;vertical-align: middle;margin-left:20px;">
                             <h5>{{session.ip}}</h5>
-                            <h5>{{formattedDate}}</h5>
+                            <h5 v-if="typeof logOutUserStatus.value !== 'number'">{{formattedDate}}</h5>
+                            <h5 v-if="logOutUserStatus.value==200">Done 🤐</h5>
+                            <h5 v-if="typeof logOutUserStatus.value == 'number' && logOutUserStatus.value!==200">{{logOutUserErrors}}</h5>
                         </div>
                     </div>
-                    <div @click="logoutUser(props.id,session.token)" class="session_out pointer">
+                    <div @click="handleLogOutUser()" class="session_out pointer">
                         <img class="pointer" src="../assets/icons/door-check-out-icon.svg" alt=""></div>
                 </div>
 
@@ -67,6 +80,12 @@ const formattedDate = computed(() => {
     content: 'This Session';
     background:rgba(0,0,0,0.2);
     color: white;
+}
+
+.sessionOut{
+
+    background:#6b0000;
+
 }
 
 </style>

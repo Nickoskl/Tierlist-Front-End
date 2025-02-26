@@ -7,6 +7,7 @@ import Users from '../views/UsersView.vue'
 import Register from '../views/RegisterVIew.vue'
 import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
+import { storeToRefs } from 'pinia';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,22 +52,32 @@ const router = createRouter({
 
 router.beforeEach(async(to,from)=>{
 
-  const authenticated = useAuthStore();
-  const {authenticate} = useAuthStore();
+  const {status,userLoggedIn} = storeToRefs(useAuthStore());
+  const {authenticate,resetAll} = useAuthStore();
 
 
-  if(authenticated.userLoggedIn==false && cookie.get('user_auth')){
+  if(cookie.get('user_auth')){
     await authenticate(0);
+    
+
+    if(status.value==403){
+      await resetAll();
+      cookie.remove('user_auth');
+      return {name:'home'}
+    }
     console.log("HIT");
   }
+
+
   // console.log(to.meta.loggedIn)
   // console.log(authenticated.userLoggedIn)
   // console.log()
-  if (typeof to.meta.loggedIn !== "undefined" && authenticated.userLoggedIn!==to.meta.loggedIn){
+  if (typeof to.meta.loggedIn !== "undefined" && userLoggedIn.value!==to.meta.loggedIn){
     return {name:'home'}
   }
 
 
 })
+
 
 export default router

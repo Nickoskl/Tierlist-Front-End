@@ -10,6 +10,7 @@ export const useUserStore = defineStore('userStore',{
             user:[],
             errors:'',
             status:'',
+            loadingDone:false,
 
         }
     },
@@ -32,6 +33,11 @@ export const useUserStore = defineStore('userStore',{
 
             }finally{
 
+                //#######################################
+                    
+                    
+
+                                    
                 if(resp){
 
                     resp.data.forEach((element,index) => {
@@ -46,10 +52,14 @@ export const useUserStore = defineStore('userStore',{
 
                         
                     });
-                    console.log(resp.data)
+                    console.log(resp.data);
+                    this.loadingDone=true;
                     this.status = resp.status;
                 }
 
+
+
+                
 
             }
 
@@ -116,6 +126,7 @@ export const useUserStore = defineStore('userStore',{
                             
                         }
                         this.status = resp.status;
+                        this.loadingDone=true;
                     // console.log(this.user[0])
                     
                 }
@@ -240,14 +251,8 @@ export const useUserStore = defineStore('userStore',{
                     }
                     console.log(this.status);
 
-
-
                 }
-
             }
-
-
         }
     }
-
 })

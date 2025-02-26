@@ -64,7 +64,7 @@ const toggleEdit = () => {
 
         <div class="profile_card">
             <h5 class="profile_title">{{user.Name}}'s Profile</h5>
-            <img class="profile_img" src="../assets/icons/male-icon.svg" alt="">
+            <img class="profile_img" :src="user.Img=='default'?'/src/assets/icons/male-icon.svg':''" alt="">
             <div class="profile_info">
 
                 <h3 v-if="!editMode" >{{ user.Name }}</h3>

@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('authStore',{
             userEmail:'',
             userToken:'',
             userSuper: false,
+            userImg: '',
             errors:'',
             status: '',
         }
@@ -35,9 +36,21 @@ export const useAuthStore = defineStore('authStore',{
                     this.userName = resp.data.username;
                     this.userID = resp.data._id;
                     this.userEmail = resp.data.email;
-                    this.userToken = resp.data.session.token[0];
+                    this.userImg = resp.data.avatar;
                     this.userSuper = resp.data.super;
-                    cookie.set('user_auth', resp.data.session.token[0])
+                    // console.log(cookie.get('user_auth'));
+                    var indexNum = resp.data.session.token.length-1;
+                    console.log('Token from response:', resp.data.session.token[indexNum]);
+                    if (cookie.get('user_auth')) {
+                      this.userToken = cookie.get('user_auth');
+                      console.log('Token from cookie:', this.userToken);
+                    } else {
+                      this.userToken = resp.data.session.token[indexNum];
+                      cookie.set('user_auth', this.userToken); // Set only the token string
+                      console.log('Token set in cookie:', this.userToken);
+                    }
+            
+                    
                     if(this.router.currentRoute.name == 'login'){
                         setTimeout(()=>{
                             this.router.push({name:'home'});
@@ -69,6 +82,7 @@ export const useAuthStore = defineStore('authStore',{
                     this.userName = '';
                     this.userID = '';
                     this.userEmail = '';
+                    this.userImg = '';
                     this.userToken = '';
                     this.userSuper = false;
                     cookie.remove('user_auth');
@@ -127,6 +141,18 @@ export const useAuthStore = defineStore('authStore',{
             }
 
             
+        },
+        resetAll(){
+            this.userLoggedIn=false
+            this.userName=''
+            this.userID=''
+            this.userEmail=''
+            this.userToken=''
+            this.userSuper= false
+            this.errors=''
+            this.status= ''
+            this.userImg=''
+
         },
         reset(){
             this.status = '';

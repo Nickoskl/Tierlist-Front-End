@@ -16,12 +16,14 @@ const handleDelete = async (usrID) => {
   localStatus.value = userCardStatus;
 };
 
-defineProps({
+const props = defineProps({
     userIt: {
     type: Object,
     required: true
   }
 })
+
+console.log(props.userIt.Avatar)
 
 
 </script>
@@ -29,7 +31,7 @@ defineProps({
 <template>
 
             <div class="user_card">
-                <img class="user_img" src="../assets/imgs/c2c9362d-eb52-47ce-a0df-ae58b0e40ae3.png" alt="">
+                <img class="user_img" :src="userIt.Img=='default'?'/src/assets/icons/male-icon.svg':''" alt="">
                 <div class="user_info">
                     <h5 style="display: inline-block;"> {{ userIt.Name }}</h5><h5 v-if="authenticated.userID === userIt.ID" style="display:inline-block;opacity:0.5;margin:0;padding-left: 20px;">- YOU</h5>
                     <h5>{{userIt.Email}}</h5>
