@@ -11,7 +11,6 @@ export const useUserStore = defineStore('userStore',{
             errors:'',
             status:'',
             loadingDone:false,
-
         }
     },
     actions:{
@@ -254,5 +253,5 @@ export const useUserStore = defineStore('userStore',{
                 }
             }
         }
-    }
+    },
 })

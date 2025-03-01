@@ -8,14 +8,15 @@ import { useAuthStore } from './stores/auth';
 import {storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
 import { useUserStore } from './stores/user';
+import LoadingCard from './components/LoadingCard.vue'
 
 // const {userStatus,authStatus} = ref('')
 
 const {authenticate} = useAuthStore();
-const {error:authErrors,status:authStatus,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
-const {error:userErrors,status:userStatus} = storeToRefs(useUserStore);
+const {errors:authErrors,status:authStatus,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
+const {errors:userErrors,status:userStatus,loadingDone:load} = storeToRefs(useUserStore());
 
-const hasCookie = ref($cookies.get('user_auth'));
+
 
 onMounted(async()=>{
 
@@ -24,36 +25,6 @@ console.log("TESTESTESTSET")
   });
 
 
-
-// })
-
-// watch([userStatus, authStatus], async ([newUserStatus, newAuthStatus]) => {
-//   console.log(newUserStatus)
-//   console.log(newAuthStatus)
-
-//   if(newUserStatus==403||newAuthStatus==403){
-//       cookie.remove('user_auth');
-//       this.router.push({name:'home'});
-//       console.log("ERROR 403")
-//     }
-
-// })
-
-// watchEffect(() => {
-//   hasCookie.value = cookie.get('user_auth');
-// });
-
-// watch(hasCookie, async (newValue, oldValue) => {
-//   if (newValue !== oldValue) {
-//     console.log('Cookie value changed:', newValue);
-//     if (newValue) {
-//       await authenticate('/user/login', 0);
-//     } else {
-//       // Handle cookie deletion or other actions
-//       console.log('Cookie deleted');
-//     }
-//   }
-// });
 </script>
 
 <template>
@@ -73,13 +44,15 @@ console.log("TESTESTESTSET")
         <input type="file" accept=".png,.jpg" name="file">
         <button>Upload PNG or JPG up to 10 MB</button>
     </form> -->
-    <!-- <img src="http://localhost:5000/img/44158.png" alt=""> -->
+    <!-- <img typeof="image" src="http://localhost:5000/img/44158" alt=""> -->
     <NavHeader />
     <div class="middle_title">
         <h3>TIERLIST</h3>
     </div>
     <AdminMenu v-if="userSuper" />
     <div class="main">
+      
+    <!-- <LoadingCard :load="load" :errors="userErrors"/> -->
 
     <RouterView />
 

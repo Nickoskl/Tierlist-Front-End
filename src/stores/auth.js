@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('authStore',{
             userImg: '',
             errors:'',
             status: '',
+            loadingDone:false
         }
     },
     actions:{
@@ -49,12 +50,12 @@ export const useAuthStore = defineStore('authStore',{
                       cookie.set('user_auth', this.userToken); // Set only the token string
                       console.log('Token set in cookie:', this.userToken);
                     }
-            
+                    this.loadingDone = true;
                     
                     if(this.router.currentRoute.name == 'login'){
-                        setTimeout(()=>{
+                        // setTimeout(()=>{
                             this.router.push({name:'home'});
-                        },1000)
+                        // },1000)
                     }
                 }else{
                     setTimeout(()=>{
@@ -86,6 +87,7 @@ export const useAuthStore = defineStore('authStore',{
                     this.userToken = '';
                     this.userSuper = false;
                     cookie.remove('user_auth');
+                    this.loadingDone = true;
                     if(this.router.currentRoute.name == 'logout'){
                         setTimeout(()=>{
                             this.router.push({name:'home'});
@@ -125,6 +127,7 @@ export const useAuthStore = defineStore('authStore',{
                 if(resp){
 
                     this.status = resp.status;
+                    this.loadingDone = true;
 
 
                     setTimeout(()=>{
@@ -152,11 +155,13 @@ export const useAuthStore = defineStore('authStore',{
             this.errors=''
             this.status= ''
             this.userImg=''
+            this.loadingDone = false;
 
         },
         reset(){
             this.status = '';
             this.errors = '';
+            this.loadingDone = false;
         }
     },
     getters:{},

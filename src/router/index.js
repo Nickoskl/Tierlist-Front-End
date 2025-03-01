@@ -8,6 +8,7 @@ import Register from '../views/RegisterVIew.vue'
 import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
 import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,10 +52,11 @@ const router = createRouter({
 })
 
 router.beforeEach(async(to,from)=>{
-
+  const {loadingDone} = storeToRefs(useUserStore())
   const {status,userLoggedIn} = storeToRefs(useAuthStore());
   const {authenticate,resetAll} = useAuthStore();
 
+  loadingDone.value = false;
 
   if(cookie.get('user_auth')){
     await authenticate(0);

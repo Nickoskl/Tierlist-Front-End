@@ -3,10 +3,17 @@ import { ref,onMounted,watch,reactive } from 'vue';
 import SessionLine from '../components/SessionLine.vue'
 import {useUserStore} from '../stores/user';
 import { storeToRefs } from 'pinia';
+import { useAuthStore } from '@/stores/auth';
+import { useImgStore } from '@/stores/img';
 
 const {editUser} =useUserStore();
 const {errors,status:userinfoStatus} = storeToRefs(useUserStore());
+const {userSuper} =storeToRefs(useAuthStore())
 
+const imgStore = useImgStore();
+const { createImgUrl } = imgStore; // Access the getter directly from the store instance
+
+const imgURL = ref('');
 
 const localStatus = ref('');
 const editMode=ref(false);
@@ -41,6 +48,11 @@ watch(() => props.editModeImp, (val) => {
 });
 
 
+onMounted(async () => {
+  console.log("TEST");
+  await loadImage(createImgUrl(props.user.Img));
+  
+});
 
 const handleEditUser = async () => {
   await editUser(props.user.ID, formData);
@@ -56,6 +68,18 @@ const toggleEdit = () => {
 };
 
 
+const loadImage = (url) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => {
+      imgURL.value = url;
+      imgLoading.value = false;
+      resolve();
+    };
+    img.onerror = reject;
+  });
+};
 
 </script>
 
@@ -64,11 +88,12 @@ const toggleEdit = () => {
 
         <div class="profile_card">
             <h5 class="profile_title">{{user.Name}}'s Profile</h5>
-            <img class="profile_img" :src="user.Img=='default'?'/src/assets/icons/male-icon.svg':''" alt="">
+            <img class="profile_img" :src="props.user.Img=='default'?'/src/assets/icons/male-icon.svg':user.Img" alt="">
             <div class="profile_info">
 
                 <h3 v-if="!editMode" >{{ user.Name }}</h3>
                 <h3 v-if="!editMode" >{{ user.Email }}</h3>
+                <h3 v-if="!editMode && userSuper" >Superuser: {{ user.Super }}</h3>
 
                 <form @submit.prevent="handleEditUser()">
 

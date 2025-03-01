@@ -30,6 +30,8 @@ Here're some of the project's best features:
 
 *   A basic and responsive color generator
 *   A drag and drop feature when creating template tierlists that I should have honestly used a library for it
+*   A basic loader until the API responds
+*   Auto logout and redirect to home on session invalidation
 
 <h2>💖Like my work?</h2>
 

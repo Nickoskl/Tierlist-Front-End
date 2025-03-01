@@ -2,15 +2,26 @@
 import { reactive,watchEffect } from 'vue';
 import {useAuthStore} from '../stores/auth';
 import {storeToRefs} from 'pinia';
+import LoadingCard from '../components/LoadingCard.vue'
+import { ref } from 'vue';
 
-const {errors,status} = storeToRefs(useAuthStore());
+const {errors,status,loadingDone} = storeToRefs(useAuthStore());
 const {authenticate} = useAuthStore();
+
+const load = ref('');
 
 
 const formData = reactive({
     email: '',
     password: ''
 })
+
+const handleAuth=async() =>{
+    load.value = loadingDone.value;
+    await authenticate(formData);
+    if(loadingDone.value){load.value=loadingDone.value}
+
+}
 
 
 
@@ -29,19 +40,14 @@ const formData = reactive({
                 <img src="../assets/icons/male-icon.svg" alt="">
             </div>
             <div class="login_info">
-                <form @submit.prevent=" authenticate(formData)">
+                <form @submit.prevent=" handleAuth()">
                     <input required="true" v-model="formData.email" placeholder="Email " type="text" />
                     <input required="true" v-model="formData.password" placeholder="Password" type="password" />
                     <button  class="pointer">Login</button>
                 </form>
 
             </div>
-            <div v-if="typeof status == 'number' && status!==200">
-                <h5>Incorrect Credentials, {{ errors.data }}</h5>
-            </div>
-            <div v-if="status==200">
-                Success 😎, Redirecting ...
-            </div>
+            <LoadingCard :load="load" :errors="errors"/>
         </div>
 
 

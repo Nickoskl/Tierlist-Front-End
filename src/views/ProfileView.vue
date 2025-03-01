@@ -8,6 +8,7 @@ import{storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
 import { useAuthStore } from '@/stores/auth';
 import {ref} from 'vue'
+import LoadingCard from '../components/LoadingCard.vue'
 
 
 const editMode = ref(false);
@@ -17,7 +18,7 @@ const userData = ref([]);
 const route = useRoute();
 
 const {getUser} = useUserStore();
-const {user,status:profineViewstatus} = storeToRefs(useUserStore())
+const {user,status:profineViewstatus,loadingDone,errors} = storeToRefs(useUserStore())
 
 const authenticated = useAuthStore();
 const {authenticate} = useAuthStore();
@@ -47,9 +48,9 @@ onMounted(async()=>{
 
 <template>
 
-    <!-- <h1>{{ data[0]}}</h1> -->
+<LoadingCard :load="loadingDone" :errors="errors"/>
 
-<UserInfoSection :user="userData" :editPerm="editable" :editModeImp="editMode" />
+<UserInfoSection v-if="loadingDone" :user="userData" :editPerm="editable" :editModeImp="editMode" />
 
 <CardSection title="User TierLists" :cardNum=6 />
 

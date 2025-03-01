@@ -1,4 +1,5 @@
 import './assets/styles.css';
+import 'primeicons/primeicons.css'
 import 'https://code.jquery.com/jquery-3.7.1.min.js';
 
 import { createApp } from 'vue'

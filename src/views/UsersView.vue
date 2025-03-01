@@ -3,6 +3,7 @@ import {storeToRefs} from 'pinia';
 import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 import UserCard from '../components/UserCard.vue'
+import LoadingCard from '../components/LoadingCard.vue'
 
 const {getUsers} = useUserStore();
 const {user,errors,status,loadingDone} = storeToRefs(useUserStore());
@@ -24,16 +25,9 @@ onMounted(async()=>{
 <template>
 
     
-        <div v-if="!loadingDone">
-            <h3>LOADING</h3>
-        </div>
+        <LoadingCard :load="loadingDone" :errors="errors"/>
 
-        <div v-if="errors">
-            <h3>{{errors.data}}</h3>
-        </div>
-
-
-        <div class="admin_userlist">
+        <div v-if="loadingDone" class="admin_userlist">
             <UserCard v-for="card in user" :userIt="card" />
         </div>
 
