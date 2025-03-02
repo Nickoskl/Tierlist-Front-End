@@ -2,12 +2,18 @@
 import { RouterLink } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
+import { useImgStore } from '@/stores/img';
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 const authenticated = useAuthStore()
 const {deleteUser} = useUserStore();
 const {status:userCardStatus,errors,user} = storeToRefs(useUserStore());
+
+const imgStore = useImgStore();
+const { createImgUrl } = imgStore;
+
+const imgLoaded = ref(false);
 
 const localStatus = ref('');
 
@@ -23,7 +29,6 @@ const props = defineProps({
   }
 })
 
-console.log(props.userIt.Avatar)
 
 
 </script>
@@ -31,7 +36,8 @@ console.log(props.userIt.Avatar)
 <template>
 
             <div class="user_card">
-                <img class="user_img" :src="userIt.Img=='default'?'/src/assets/icons/male-icon.svg':''" alt="">
+                <div v-if="!imgLoaded" class="user_img"><i class="pi pi-spin pi-spinner"></i></div>
+                <img :class="imgLoaded?'user_img':'noDisplay'" @load="imgLoaded=true"  :src="userIt.Img=='default'?'/src/assets/icons/male-icon.svg':createImgUrl(userIt.Img)" alt="">
                 <div class="user_info">
                     <h5 style="display: inline-block;"> {{ userIt.Name }}</h5><h5 v-if="authenticated.userID === userIt.ID" style="display:inline-block;opacity:0.5;margin:0;padding-left: 20px;">- YOU</h5>
                     <h5>{{userIt.Email}}</h5>
@@ -44,10 +50,10 @@ console.log(props.userIt.Avatar)
                     <img src="../assets/icons/pencil-icon.svg" alt="">
                     <h5>Edit</h5>
                 </RouterLink>
-                <div @click="handleDelete(userIt.ID)" class="pointer user_btn">
+                <a @click="handleDelete(userIt.ID)" class="pointer user_btn">
                     <img src="../assets/icons/close-square-icon.svg" alt="">
                     <h5>Delete</h5>
-                </div>
+                </a>
                 <div v-if="typeof localStatus.value == 'number' && localStatus.value!==200">
                     <h5>Something Happened, {{ errors.data }}</h5>
                 </div>
@@ -59,6 +65,21 @@ console.log(props.userIt.Avatar)
 </template>
 
 <style scoped>
+
+.user_img i{
+
+font-size: 30px;
+text-align: center;
+width:100px;
+padding:40% 0;
+display: inline-block;
+color:#d0d0d2;
+
+}
+
+.noDisplay{
+    display: none;
+}
 
 
 </style>

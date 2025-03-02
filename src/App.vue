@@ -18,12 +18,6 @@ const {errors:userErrors,status:userStatus,loadingDone:load} = storeToRefs(useUs
 
 
 
-onMounted(async()=>{
-
-console.log("TESTESTESTSET")
-
-  });
-
 
 </script>
 
@@ -40,10 +34,6 @@ console.log("TESTESTESTSET")
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
 </head>
 <body class="body">
-    <!-- <form method="post" enctype="multipart/form-data" action="http://localhost:5000/img/upload">
-        <input type="file" accept=".png,.jpg" name="file">
-        <button>Upload PNG or JPG up to 10 MB</button>
-    </form> -->
     <!-- <img typeof="image" src="http://localhost:5000/img/44158" alt=""> -->
     <NavHeader />
     <div class="middle_title">
@@ -77,7 +67,7 @@ console.log("TESTESTESTSET")
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('./assets/imgs/c2c9362d-eb52-47ce-a0df-ae58b0e40ae3.png') no-repeat;
+    background: url('./assets/imgs/compressed.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
     filter: opacity(1) blur(10px);
