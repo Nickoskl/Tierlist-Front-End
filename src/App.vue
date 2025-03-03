@@ -10,13 +10,8 @@ import cookie from 'vue-cookies';
 import { useUserStore } from './stores/user';
 import LoadingCard from './components/LoadingCard.vue'
 
-// const {userStatus,authStatus} = ref('')
 
-const {authenticate} = useAuthStore();
 const {errors:authErrors,status:authStatus,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
-const {errors:userErrors,status:userStatus,loadingDone:load} = storeToRefs(useUserStore());
-
-
 
 
 </script>

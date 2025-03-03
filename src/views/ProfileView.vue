@@ -9,6 +9,7 @@ import cookie from 'vue-cookies';
 import { useAuthStore } from '@/stores/auth';
 import {ref} from 'vue'
 import LoadingCard from '../components/LoadingCard.vue'
+import { watch } from 'vue';
 
 
 const editMode = ref(false);
@@ -18,17 +19,34 @@ const userData = ref([]);
 const route = useRoute();
 
 const {getUser} = useUserStore();
-const {user,status:profineViewstatus,loadingDone,errors} = storeToRefs(useUserStore())
+const {user,status:profileViewstatus,loadingDone,errors} = storeToRefs(useUserStore())
 
-const authenticated = useAuthStore();
-const {authenticate} = useAuthStore();
+const { authenticate } = useAuthStore();
+const { userSuper: userSuperRef } = storeToRefs(useAuthStore());
+// const {authenticate} = useAuthStore();
+
+watch(() => route.params.id, async(val) => {
+  console.log("ID CHANGED: "+val);
+  await getData();
+});
+
 
 onMounted(async()=>{
+
+  await getData();
+
+})
+
+const getData =async () =>{
+
+  
+  console.log("LOADING DONE :"+loadingDone.value)
 
      await getUser(route.params.id);
      userData.value = user.value[0];
 
-    if(user.value[0].session.indexOf({token:cookie.get("user_auth")}) || authenticated.userSuper){
+
+    if(userData.value.session.length>0 || userSuperRef.value){
         editable.value = true;
     }
 
@@ -40,8 +58,8 @@ onMounted(async()=>{
     // editMode.value = route.query.editMode == 'true';
   console.log('Edit Mode:', editMode.value);
 
-})
 
+}
 
 
 </script>

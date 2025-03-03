@@ -13,8 +13,8 @@ const {status:imgStatus,imgID,errors:imgErrors} = storeToRefs(useImgStore())
 const password_ver=ref('');
 const passMatch=ref(false);
 
-const imgLoaded=ref(false);
-const imgLoading=ref(false);
+// const imgLoaded=ref(false);
+// const imgLoading=ref(false);
 
 
 const formData = reactive({
@@ -54,29 +54,29 @@ function postPreCheck(){
 }
 
 
-const handleImageSubmit=async()=>{
+// const handleImageSubmit=async()=>{
 
-    const file = event.target.files[0];
-    imgLoaded.value = false;
-    imgLoading.value = true;
+//     const file = event.target.files[0];
+//     imgLoaded.value = false;
+//     imgLoading.value = true;
 
-    if (file) {
-    const imgFormData = new FormData();
-    imgFormData.append('file', file);
-    await uploadImg(imgFormData);
-        if(imgStatus.value===200){
-            formData.img = imgID.value; // Correctly set the imgID value to formData.img
-            console.log("HERE DONE");
-        }
+//     if (file) {
+//     const imgFormData = new FormData();
+//     imgFormData.append('file', file);
+//     await uploadImg(imgFormData);
+//         if(imgStatus.value===200){
+//             formData.img = imgID.value; // Correctly set the imgID value to formData.img
+//             console.log("HERE DONE");
+//         }
 
-    }
+//     }
 
-    console.log(formData.img);
-    console.log(imgLoaded.value);
-    console.log(formData.img);
+//     console.log(formData.img);
+//     console.log(imgLoaded.value);
+//     console.log(formData.img);
 
 
-}
+// }
 
 
 
@@ -90,18 +90,18 @@ const handleImageSubmit=async()=>{
         <div class="login_card">
             <h3 class="login_title">Register</h3>
             <div class="login_img">
-                <div v-if="imgLoading&&!imgLoaded" class="profile_img"><i class="pi pi-spin pi-spinner"></i></div>
-                <!-- <img  src="../assets/icons/male-icon.svg" alt=""> -->
+                <img src="../assets/icons/male-icon.svg" alt="">
+                <!-- <div v-if="imgLoading&&!imgLoaded" class="profile_img"><i class="pi pi-spin pi-spinner"></i></div>
                 <img v-if="imgLoading || imgStatus==200" :class="imgLoaded?'':'noDisplay'" @load="imgLoaded=true"  :src="createImgUrl(imgID)" alt="">
-                <img v-else src="../assets/icons/male-icon.svg" alt="">
-                <!-- <h5 for="file-input" class="pointer">Add Photo</h5> -->
-                <form method="post" enctype="multipart/form-data">
-                    <label for="file-input" class="pointer">Add Photo <i v-if="imgStatus==200&& imgLoaded" style="font-size: 15px;width:10px;margin:0;padding: 0;" class="pi pi-check"></i></label>
-                    <input type="file" @change="handleImageSubmit" class="file-input" id="file-input" accept=".png,.jpg" name="file">
-                </form>
+                <img v-else src="../assets/icons/male-icon.svg" alt=""> -->
+                <!-- <form method="post" enctype="multipart/form-data"> -->
+                    <!-- <label for="file-input" class="pointer">Add Photo <i v-if="imgStatus==200&& imgLoaded" style="font-size: 15px;width:10px;margin:0;padding: 0;" class="pi pi-check"></i></label> -->
+                    <!-- <input type="file" @change="handleImageSubmit" class="file-input" id="file-input" accept=".png,.jpg" name="file"> -->
+                <!-- </form> -->
             </div>
             <div class="login_info">
                 <form @submit.prevent="postPreCheck()">
+                    <h6 class="register_label" >You can change your photo on your profile page</h6>
                     <input required="true" v-model="formData.username" placeholder="Username" type="text">
                     <input required="true" v-model="formData.email" placeholder="Email " type="text">
                     <input required="true" v-model="formData.password" placeholder="Password" type="text">
@@ -140,6 +140,16 @@ display: inline-block;
 
 .noDisplay{
     display: none;
+}
+
+.register_label{
+    padding:2%;
+    margin: 0;
+    margin-top:3%;
+    font-size: 13px;
+    background-color: #222831;
+    text-align: left;
+    font-weight: 400;
 }
 
 

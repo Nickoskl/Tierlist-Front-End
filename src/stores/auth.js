@@ -39,7 +39,6 @@ export const useAuthStore = defineStore('authStore',{
                     this.userEmail = resp.data.email;
                     this.userImg = resp.data.avatar;
                     this.userSuper = resp.data.super;
-                    // console.log(cookie.get('user_auth'));
                     var indexNum = resp.data.session.token.length-1;
                     console.log('Token from response:', resp.data.session.token[indexNum]);
                     if (cookie.get('user_auth')) {
@@ -90,6 +89,7 @@ export const useAuthStore = defineStore('authStore',{
                     this.loadingDone = true;
                     if(this.router.currentRoute.name == 'logout'){
                         setTimeout(()=>{
+
                             this.router.push({name:'home'});
                             this.status = '';
                             this.errors = '';

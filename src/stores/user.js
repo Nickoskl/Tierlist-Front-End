@@ -84,33 +84,40 @@ export const useUserStore = defineStore('userStore',{
                 if(resp){
 
                     var session=[];
-                    
-                    const date = resp.data.session.date.map((element,index)=>{
-                        var dateIter=[];
-                        dateIter=element
-                        return dateIter
-                    })
 
-                    const token = resp.data.session.token.map((element,index)=>{
-                        var tokenIter=[];
-                        tokenIter=element
-                        return tokenIter
-                    })
+                    if(resp.data.session){
 
-                    const ip = resp.data.session.ip.map((element,index)=>{
-                        var ipIter=[];
-                        ipIter=element
-                        return ipIter
-                    })
+                        console.log(resp.data.session.date)
+                                            
+                        const date = resp.data.session.date.map((element,index)=>{
+                            var dateIter=[];
+                            dateIter=element
+                            return dateIter
+                        })
+
+                        const token = resp.data.session.token.map((element,index)=>{
+                            var tokenIter=[];
+                            tokenIter=element
+                            return tokenIter
+                        })
+
+                        const ip = resp.data.session.ip.map((element,index)=>{
+                            var ipIter=[];
+                            ipIter=element
+                            return ipIter
+                        })
 
 
-                    ip.forEach((element,index) => {
-                        session[index]={
-                            ip: ip[index],
-                            date: date[index],
-                            token:token[index]
-                        }
-                    });
+                        ip.forEach((element,index) => {
+                            session[index]={
+                                ip: ip[index],
+                                date: date[index],
+                                token:token[index]
+                            }
+                        });
+
+
+                    }
 
 
 

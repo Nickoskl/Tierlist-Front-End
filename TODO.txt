@@ -9,5 +9,3 @@
 
 # Continue with the html to VUE conversion
 # Refresh profile with new data after userDelete,userSessionout, and edit
-# Add loading animation
-# Add image uploading

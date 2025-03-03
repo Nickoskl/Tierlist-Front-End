@@ -19,7 +19,7 @@ const {userLoggedIn,userID,userImg} = storeToRefs(useAuthStore())
             <h5 class="header_btn_text">Register</h5>
         </RouterLink>
         <RouterLink :to="{ name: 'user', params: { id: userID } }" v-if="userLoggedIn" class="pointer header_btn">
-            <img :src="userImg=='default'?'/src/assets/icons/male-icon.svg':''" alt="" class="header_icon">
+            <img src="/src/assets/icons/male-icon.svg" alt="" class="header_icon">
             <h5 class="header_btn_text">Me</h5>
         </RouterLink>
         <div v-if="userLoggedIn" class="pointer header_btn">

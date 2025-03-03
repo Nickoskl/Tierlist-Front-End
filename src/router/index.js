@@ -57,9 +57,19 @@ router.beforeEach(async(to,from)=>{
   const {authenticate,resetAll} = useAuthStore();
 
   loadingDone.value = false;
-
   if(cookie.get('user_auth')){
-    await authenticate(0);
+
+    console.log(from);
+    console.log(to);
+    
+    if(from.name=='login'&& to.name=='home'){
+      console.log(from.name);
+      console.log(to.name);
+    }else{
+      await authenticate(0);
+      console.log("HIT");
+    }
+
     
 
     if(status.value==403){
@@ -67,8 +77,10 @@ router.beforeEach(async(to,from)=>{
       cookie.remove('user_auth');
       return {name:'home'}
     }
-    console.log("HIT");
+
   }
+
+
 
 
   // console.log(to.meta.loggedIn)

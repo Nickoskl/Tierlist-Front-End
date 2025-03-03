@@ -8,15 +8,22 @@ import { useImgStore } from '@/stores/img';
 
 const { editUser } = useUserStore();
 const { errors, status: userinfoStatus } = storeToRefs(useUserStore());
+
 const { userSuper } = storeToRefs(useAuthStore());
 
 const imgStore = useImgStore();
-const { createImgUrl } = imgStore; // Access the getter directly from the store instance
+const { createImgUrl,uploadImg } = imgStore; 
+const {status:imgStatus,imgID,errors:imgErrors} = storeToRefs(useImgStore())
 
-const imgLoaded = ref(false); // State to manage image loading
 
+const imgLoaded = ref(false);
+const imgUpoaded = ref(false);
 const localStatus = ref('');
 const editMode = ref(false);
+
+
+
+
 
 const formData = reactive({
   username: '',
@@ -44,6 +51,7 @@ watch(() => props.editModeImp, (val) => {
   editMode.value = val;
 });
 
+
 const handleEditUser = async () => {
   await editUser(props.user.ID, formData);
   localStatus.value = userinfoStatus.value;
@@ -55,7 +63,37 @@ const handleEditUser = async () => {
 const toggleEdit = () => {
   editMode.value = !editMode.value;
   localStatus.value = '';
+console.log(imgLoaded.value);
+console.log(imgUpoaded.value);
+console.log(props.user.Img)
 };
+
+
+const handleImageSubmit=async()=>{
+    imgID.value=0;
+    imgStatus.value='';
+    formData.img=0
+const file = event.target.files[0];
+imgLoaded.value = false;
+imgUpoaded.value = false;
+
+
+if (file) {
+const imgFormData = new FormData();
+imgFormData.append('file', file);
+await uploadImg(imgFormData);
+    if(imgStatus.value===200){
+        formData.img = imgID.value; // Correctly set the imgID value to formData.img
+        console.log("HERE DONE");
+        imgUpoaded.value = true;
+    }
+
+}
+
+
+
+}
+// || ((imgStatus==200)&&(imgLoading || imgUpoaded))
 
 </script>
 
@@ -64,8 +102,18 @@ const toggleEdit = () => {
     <h5 class="profile_title">{{ user.Name }}'s Profile</h5>
     <div class="login_img">
         <div v-if="!imgLoaded" class="profile_img"><i class="pi pi-spin pi-spinner"></i></div>
-        <img :class="imgLoaded?'profile_img':'noDisplay'" @load="imgLoaded=true" :src="props.user.Img === 'default' ? '/src/assets/icons/male-icon.svg' : createImgUrl(user.Img)" alt="">
-        <h5 v-if="editMode" class="pointer">Add Photo</h5>
+        <img v-if="imgUpoaded && imgStatus==200" :class="imgLoaded?'':'noDisplay'" @load="imgLoaded=true"  :src="createImgUrl(formData.img)" alt="">
+        <img @load="imgLoaded=true" :class="imgLoaded&&!imgUpoaded?'':'noDisplay'" :src="props.user.Img==='default'?'/src/assets/icons/male-icon.svg':createImgUrl(props.user.Img)" alt="">
+
+        <!-- <div v-if="imgLoading || !imgLoaded" class="profile_img"><i class="pi pi-spin pi-spinner"></i></div> -->
+        <!-- <img v-if="imgLoaded && imgStatus==200" :class="imgLoaded?'':'noDisplay'" @load="imgLoaded=true;imgLoading=false"  :src="createImgUrl(imgID)" alt=""> -->
+        <!-- <img @load="imgLoaded=true;imgLoading=false" :src="user.Img=='default'?'../assets/icons/male-icon.svg':createImgUrl(user.Img)" alt=""> -->
+
+        <!-- <img v-else @load="imgLoaded=true;" :src="user.Img=='default'?'../assets/icons/male-icon.svg':createImgUrl(user.Img)" alt=""> -->
+        <form v-if="editMode" style="text-align:center;margin:0 auto;" method="post" enctype="multipart/form-data">
+            <label for="file-input" class="pointer">Change Photo <i v-if="imgLoaded && imgStatus==200" style="font-size: 15px;width:10px;margin:0;padding: 0;" class="pi pi-check"></i></label>
+            <input type="file" @change="handleImageSubmit" class="noDisplay file-input" id="file-input" accept=".png,.jpg" name="file">
+        </form>
     </div>
     <div class="profile_info">
       <h3 v-if="!editMode">{{ user.Name }}</h3>
