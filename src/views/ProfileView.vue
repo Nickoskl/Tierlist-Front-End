@@ -3,7 +3,7 @@ import { onMounted } from 'vue';
 import CardSection from '../components/CardSection.vue'
 import UserInfoSection from '../components/UserInfoSection.vue'
 import { useUserStore } from '@/stores/user';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 import{storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
 import { useAuthStore } from '@/stores/auth';
@@ -17,6 +17,7 @@ const editable = ref(false);
 const userData = ref([]);
 
 const route = useRoute();
+const router = useRouter();
 
 const {getUser} = useUserStore();
 const {user,status:profileViewstatus,loadingDone,errors} = storeToRefs(useUserStore())
@@ -43,6 +44,10 @@ const getData =async () =>{
   console.log("LOADING DONE :"+loadingDone.value)
 
      await getUser(route.params.id);
+
+    if(profileViewstatus.value!=200){
+      router.push({name:'notfound'});
+    }
      userData.value = user.value[0];
 
 

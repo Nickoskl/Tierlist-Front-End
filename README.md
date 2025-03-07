@@ -36,7 +36,7 @@ Here're some of the project's best features:
     + Admins
       + Can edit, delete any user
       + Can see superuser and session status of the users and invalidate them
-      + Cave a useful view that can see all registered users
+      + Have a useful view that can see all registered users
       + Can create Templates for users to edit and order them.
       + Can edit and delete any user Tierlist.
     + Users

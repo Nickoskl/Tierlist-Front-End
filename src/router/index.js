@@ -9,6 +9,7 @@ import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
+import NotFound from '../views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,6 +49,11 @@ const router = createRouter({
       component: Users,
       meta:{loggedIn:true}
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name:'notfound',
+      component: NotFound,
+    }
   ],
 })
 
@@ -55,6 +61,7 @@ router.beforeEach(async(to,from)=>{
   const {loadingDone} = storeToRefs(useUserStore())
   const {status,userLoggedIn} = storeToRefs(useAuthStore());
   const {authenticate,resetAll} = useAuthStore();
+  const {reset} = useUserStore();
 
   loadingDone.value = false;
   if(cookie.get('user_auth')){
@@ -70,7 +77,7 @@ router.beforeEach(async(to,from)=>{
       console.log("HIT");
     }
 
-    
+    await reset();
 
     if(status.value==403){
       await resetAll();
@@ -81,11 +88,6 @@ router.beforeEach(async(to,from)=>{
   }
 
 
-
-
-  // console.log(to.meta.loggedIn)
-  // console.log(authenticated.userLoggedIn)
-  // console.log()
   if (typeof to.meta.loggedIn !== "undefined" && userLoggedIn.value!==to.meta.loggedIn){
     return {name:'home'}
   }

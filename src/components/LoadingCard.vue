@@ -14,13 +14,13 @@ const props = defineProps({
 
 <template>
 
-    <div v-if="!props.load">
+    <div class="loaddiv" v-if="!props.load">
             <h3>LOADING</h3>
             <i class="pi pi-spin pi-spinner"></i>
         </div>
 
         <div v-if="props.errors">
-            <h3>{{props.errors.data}}</h3>
+            <h3>Error: {{props.errors.data}}</h3>
         </div>
 
 
@@ -28,17 +28,24 @@ const props = defineProps({
 
 <style scoped>
 
-div{
+.loaddiv{
     text-align: center;
     color:#d0d0d2;
-
     padding: 10% 0;
+}
+
+.loaddiv h3{
+    text-align: center;
+    color:#d0d0d2;
+    padding: 5% 0;
+    font-size: 30px;
+    font-weight: 400;
 }
 
 h3{
     text-align: center;
     color:#d0d0d2;
-    padding: 5% 0;
+    padding: 1% 0;
     font-size: 30px;
     font-weight: 400;
 }

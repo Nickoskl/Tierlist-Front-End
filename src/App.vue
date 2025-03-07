@@ -11,6 +11,7 @@ import { useUserStore } from './stores/user';
 import LoadingCard from './components/LoadingCard.vue'
 
 
+
 const {errors:authErrors,status:authStatus,userLoggedIn,userName,userID,userToken,userSuper,userEmail} = storeToRefs(useAuthStore());
 
 
@@ -29,7 +30,7 @@ const {errors:authErrors,status:authStatus,userLoggedIn,userName,userID,userToke
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
 </head>
 <body class="body">
-    <!-- <img typeof="image" src="http://localhost:5000/img/44158" alt=""> -->
+    <!-- <img src="http://localhost:5000/img/44158" alt=""> -->
     <NavHeader />
     <div class="middle_title">
         <h3>TIERLIST</h3>
