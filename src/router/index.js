@@ -5,6 +5,7 @@ import Logout from '../views/LogoutView.vue'
 import UserProfile from '../views/ProfileView.vue'
 import Users from '../views/UsersView.vue'
 import Register from '../views/RegisterVIew.vue'
+import Tierlist from '../views/TierlistVIew.vue'
 import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
 import { storeToRefs } from 'pinia';
@@ -48,6 +49,11 @@ const router = createRouter({
       name: 'users',
       component: Users,
       meta:{loggedIn:true}
+    },
+    {
+      path: '/tierlist/:id',
+      name: 'tierlist',
+      component: Tierlist,
     },
     {
       path: '/:pathMatch(.*)*',
