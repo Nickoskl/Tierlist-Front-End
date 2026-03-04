@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import CardSection from '../components/CardSection.vue'
 import UserInfoSection from '../components/UserInfoSection.vue'
 import { useUserStore } from '@/stores/user';
+import { useTierlistStore } from '@/stores/tierlist';
 import { useRoute,useRouter } from 'vue-router';
 import{storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
@@ -20,7 +21,10 @@ const route = useRoute();
 const router = useRouter();
 
 const {getUser} = useUserStore();
-const {user,status:profileViewstatus,loadingDone,errors} = storeToRefs(useUserStore())
+const {user,status:profileViewstatus,loadingDone:profileLoadingDone,errors:profileErrors} = storeToRefs(useUserStore())
+
+const {reset,getUserTierListAll}=useTierlistStore();
+const {tierlist,errors:tierlistErrors,status,loadingDone:loadingTierlistDone}=storeToRefs(useTierlistStore())
 
 const { authenticate } = useAuthStore();
 const { userSuper: userSuperRef } = storeToRefs(useAuthStore());
@@ -33,15 +37,15 @@ watch(() => route.params.id, async(val) => {
 
 
 onMounted(async()=>{
-
   await getData();
+  await getUserTierListAll(user.value[0].ID);
 
 })
 
 const getData =async () =>{
 
   
-  console.log("LOADING DONE :"+loadingDone.value)
+  console.log("LOADING DONE :"+profileLoadingDone.value)
 
      await getUser(route.params.id);
 
@@ -71,11 +75,11 @@ const getData =async () =>{
 
 <template>
 
-<LoadingCard :load="loadingDone" :errors="errors"/>
+<LoadingCard :load="profileLoadingDone" :errors="profileErrors"/>
 
-<UserInfoSection v-if="loadingDone" :user="userData" :editPerm="editable" :editModeImp="editMode" />
+<UserInfoSection v-if="profileLoadingDone" :user="userData" :editPerm="editable" :editModeImp="editMode" />
 
-<CardSection title="User TierLists" :cardNum=6 />
+<CardSection :list="tierlist" :loadingDone="loadingTierlistDone" title="User TierLists" :cardNum=6 />
 
 </template>
 

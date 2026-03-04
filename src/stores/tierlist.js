@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 export const useTierlistStore = defineStore('TierlistStore',{
-    state:()=>{
+    state(){
         return{
+
             tierlist:[],
             status:'',
             errors:'',
@@ -12,8 +13,14 @@ export const useTierlistStore = defineStore('TierlistStore',{
     },
     actions:{
 
-        async getTierlist(id){
+        reset() {                
+            this.tierlist=[];
+            this.status='';
+            this.errors='';
+            this.loadingDone=false;
+            },
 
+        async getTierlist(id){
             var resp = '';
 
             try{
@@ -48,6 +55,74 @@ export const useTierlistStore = defineStore('TierlistStore',{
                 console.log(this.tierlist.placement)
                 console.log(resp.data)
             }
+
+        },
+        async getTierListAll(){
+            var resp='';
+
+            try{
+                
+                axios.defaults.withCredentials=true;
+                resp=await axios.get(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_GET_TIERLIST}`).catch((error)=>{
+                    this.errors=error.response;
+                    this.status=error.status;
+                })
+
+
+            }catch(error){
+
+                console.log('An error occured ', error.response ? error.response.data : error.message);
+
+            }finally{
+
+                if(resp){
+                    this.tierlist=Array.from(resp.data);
+
+                    this.loadingDone=true;
+                    this.status=resp.status;
+                }
+
+
+
+            }
+
+
+
+
+
+        },
+        async getUserTierListAll(id){
+            var resp='';
+
+            try{
+                
+                axios.defaults.withCredentials=true;
+                resp=await axios.get(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_GET_USER_TIERLISTS}${id}`).catch((error)=>{
+                    this.errors=error.response;
+                    this.status=error.status;
+                })
+
+
+            }catch(error){
+
+                console.log('An error occured ', error.response ? error.response.data : error.message);
+
+            }finally{
+
+                if(resp){
+                    this.tierlist=Array.from(resp.data);
+
+                    this.loadingDone=true;
+                    this.status=resp.status;
+                }
+
+
+
+            }
+
+
+
+
 
         }
 

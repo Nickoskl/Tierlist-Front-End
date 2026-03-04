@@ -45,6 +45,36 @@ export const useTemplateStore = defineStore('TemplateStore',{
 
             }
 
+        },
+        async getTemplateAll(){
+
+            var resp='';
+
+            try{
+
+                axios.defaults.withCredentials=true;
+                resp =await axios.get(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_GET_TEMPLATE}`).catch((error)=>{
+                    this.errors=error.response;
+                    this.status=error.status;
+                })
+
+            }catch(error){
+
+                console.log('An error occured ', error.response ? error.response.data : error.message);
+
+            }finally{
+
+
+                if(reps){
+
+                    this.template=Array.from(resp.data);
+
+
+                    this.loadingDone=true;
+                    this.status=resp.status;
+                }
+
+            }
         }
 
     }

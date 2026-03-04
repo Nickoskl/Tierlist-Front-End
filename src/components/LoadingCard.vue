@@ -48,6 +48,7 @@ h3{
     padding: 1% 0;
     font-size: 30px;
     font-weight: 400;
+    background-color: #00000000;
 }
 
 i{

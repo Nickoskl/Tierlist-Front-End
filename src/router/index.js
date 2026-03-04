@@ -6,11 +6,13 @@ import UserProfile from '../views/ProfileView.vue'
 import Users from '../views/UsersView.vue'
 import Register from '../views/RegisterVIew.vue'
 import Tierlist from '../views/TierlistVIew.vue'
+import UserTierlists from '../views/UserTierlists.vue'
 import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import NotFound from '../views/NotFoundView.vue'
+import { useTierlistStore } from '@/stores/tierlist';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +53,11 @@ const router = createRouter({
       meta:{loggedIn:true}
     },
     {
+      path: '/tierlist/by/:id',
+      name: 'user tierlist',
+      component: UserTierlists,
+    },
+    {
       path: '/tierlist/:id',
       name: 'tierlist',
       component: Tierlist,
@@ -68,6 +75,7 @@ router.beforeEach(async(to,from)=>{
   const {status,userLoggedIn} = storeToRefs(useAuthStore());
   const {authenticate,resetAll} = useAuthStore();
   const {reset} = useUserStore();
+  const {reset:resetTierlistData}=useTierlistStore()
 
   loadingDone.value = false;
   if(cookie.get('user_auth')){
@@ -84,6 +92,7 @@ router.beforeEach(async(to,from)=>{
     }
 
     await reset();
+    await resetTierlistData();
 
     if(status.value==403){
       await resetAll();

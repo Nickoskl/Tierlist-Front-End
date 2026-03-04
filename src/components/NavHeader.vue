@@ -22,10 +22,10 @@ const {userLoggedIn,userID,userImg} = storeToRefs(useAuthStore())
             <img src="/src/assets/icons/male-icon.svg" alt="" class="header_icon">
             <h5 class="header_btn_text">Me</h5>
         </RouterLink>
-        <div v-if="userLoggedIn" class="pointer header_btn">
+        <RouterLink :to="{name: 'user tierlist', params: {id: userID}}" v-if="userLoggedIn" class="pointer header_btn">
             <img src="../assets/icons/pencil-icon.svg" alt="" class="header_icon">
             <h5 class="header_btn_text">My lists</h5>
-        </div>
+        </RouterLink>
         <RouterLink :to="{name: userLoggedIn?'logout':'login'}" class="pointer header_btn">
             <img src="../assets/icons/door-check-out-icon.svg" alt="" class="header_icon">
             <h5 v-if="userLoggedIn" class="header_btn_text">Sign Out</h5>

@@ -35,22 +35,22 @@ const props = defineProps({
 
 <template>
 
-            <div class="user_card">
+            <div class="user_card usrcard_for_tierlist_bg">
                 <div v-if="!imgLoaded" class="user_img"><i class="pi pi-spin pi-spinner"></i></div>
                 <img :class="imgLoaded?'user_img':'noDisplay'" @load="imgLoaded=true"  :src="userIt.Img=='default'?'/src/assets/icons/male-icon.svg':createImgUrl(userIt.Img)" alt="">
                 <div class="user_info">
                     <h5 style="display: inline-block;"> {{ userIt.Name }}</h5><h5 v-if="authenticated.userID === userIt.ID" style="display:inline-block;opacity:0.5;margin:0;padding-left: 20px;">- YOU</h5>
                     <h5>{{userIt.Email}}</h5>
                 </div>
-                <RouterLink :to="{ name: 'user', params: { id: userIt.ID } }" class="pointer user_btn">
+                <RouterLink :to="{ name: 'user', params: { id: userIt.ID } }" class='pointer user_btn'>
                     <img src="../assets/icons/eye-svgrepo-com.svg" alt="">
                     <h5>View</h5>
                 </RouterLink>
-                <RouterLink :to="{ name: 'user', params: { id: userIt.ID},query:{edit: true }}" class="pointer user_btn">
+                <RouterLink :to="{ name: 'user', params: { id: userIt.ID},query:{edit: true }}" class='pointer user_btn'>
                     <img src="../assets/icons/pencil-icon.svg" alt="">
                     <h5>Edit</h5>
                 </RouterLink>
-                <a @click="handleDelete(userIt.ID)" class="pointer user_btn">
+                <a @click="handleDelete(userIt.ID)" class='pointer user_btn'>
                     <img src="../assets/icons/close-square-icon.svg" alt="">
                     <h5>Delete</h5>
                 </a>
