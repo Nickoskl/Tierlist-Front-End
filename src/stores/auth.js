@@ -49,7 +49,7 @@ export const useAuthStore = defineStore('authStore',{
                       cookie.set('user_auth', this.userToken); // Set only the token string
                       console.log('Token set in cookie:', this.userToken);
                     }
-                    this.loadingDone = true;
+                    
                     
                     if(this.router.currentRoute.name == 'login'){
                         // setTimeout(()=>{
@@ -61,6 +61,7 @@ export const useAuthStore = defineStore('authStore',{
                         this.reset();
                     },3000)
                 }
+                this.loadingDone = true;
             }
         },
         async logout(){
@@ -100,6 +101,7 @@ export const useAuthStore = defineStore('authStore',{
                         this.reset();
                     },3000)
                 }
+                this.loadingDone=true;
             }
         },
         async register(formData){
@@ -127,7 +129,6 @@ export const useAuthStore = defineStore('authStore',{
                 if(resp){
 
                     this.status = resp.status;
-                    this.loadingDone = true;
 
 
                     setTimeout(()=>{
@@ -139,6 +140,7 @@ export const useAuthStore = defineStore('authStore',{
 
 
                 }
+                this.loadingDone=true;
 
 
             }

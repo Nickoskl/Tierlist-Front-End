@@ -49,9 +49,8 @@ export const useTierlistStore = defineStore('TierlistStore',{
                     this.tierlist.placement=Array.from(resp.data.list_config.placement);
                     this.status=resp.status;
 
-                    this.loadingDone=true;
-                    
                 }
+                this.loadingDone=true;
                 console.log(this.tierlist.placement)
                 console.log(resp.data)
             }
@@ -78,10 +77,9 @@ export const useTierlistStore = defineStore('TierlistStore',{
                 if(resp){
                     this.tierlist=Array.from(resp.data);
 
-                    this.loadingDone=true;
                     this.status=resp.status;
                 }
-
+                this.loadingDone=true;
 
 
             }
@@ -112,10 +110,9 @@ export const useTierlistStore = defineStore('TierlistStore',{
                 if(resp){
                     this.tierlist=Array.from(resp.data);
 
-                    this.loadingDone=true;
                     this.status=resp.status;
                 }
-
+                this.loadingDone=true;
 
 
             }

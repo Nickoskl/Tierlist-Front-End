@@ -26,6 +26,7 @@ const editMode = ref(false);
 const usrDeleteStatus = ref('');
 const usrDeleteErrors = ref('');
 const usrImgChangeStatus = ref('');
+const imageError = ref(null);
 
 
 
@@ -130,8 +131,9 @@ const handleDelete = async () => {
   <div class="profile_card">
     <h5 class="profile_title">{{ user.Name }}'s Profile</h5>
     <div class="login_img">
-        <div v-if="!imgLoaded" class="profile_img"><i class="pi pi-spin pi-spinner"></i></div>
-        <img v-if="imgUpoaded && imgStatus==200" :class="imgLoaded?'':'noDisplay'" @load="imgLoaded=true"  :src="createImgUrl(formData.img)" alt="">
+        {{ imageError }}
+        <div v-if="!imgLoaded" class="profile_img"><i :class="imageError?'pi pi-exclamation-circle':'pi pi-spin pi-spinner'"></i></div>
+        <img v-if="imgUpoaded && imgStatus==200" :class="imgLoaded?'':'noDisplay'" @load="imgLoaded=true" @error="imageError='Image error'"  :src="createImgUrl(formData.img)" alt="">
         <img @load="imgLoaded=true" :class="imgLoaded&&!imgUpoaded?'':'noDisplay'" :src="props.user.Img==='default'?'/src/assets/icons/male-icon.svg':createImgUrl(props.user.Img)" alt="">
         <form v-if="editMode" style="text-align:center;margin:0 auto;" method="post" enctype="multipart/form-data">
             <label for="file-input" class="pointer">Change Photo <i v-if="imgLoaded&&usrImgChangeStatus==200 && imgStatus==200" style="font-size: 15px;width:10px;margin:0;padding: 0;" class="pi pi-check"></i></label>

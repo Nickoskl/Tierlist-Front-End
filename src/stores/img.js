@@ -12,13 +12,6 @@ export const useImgStore = defineStore('imgStore',{
         }
     },
     actions:{
-
-        async deleteImg(){
-
-
-
-
-        },
         async uploadImg(formdata){
 
             var resp='';
@@ -27,8 +20,8 @@ export const useImgStore = defineStore('imgStore',{
 
                 axios.defaults.withCredentials = true;
                 resp = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_UPLOAD_IMAGE}`,formdata).catch((error)=>{
-                    this.errors = error.response;
-                    this.status = error.response.status;
+                    this.errors = error;
+                    this.status = error.status;
                     console.log(error);
                 })
 

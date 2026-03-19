@@ -79,6 +79,8 @@ textarea:not([rows]) {
   --pseudo-text: "just some text";
   }
 
+  
+
 body{
   font-family: "Source Code Pro", serif;
     /* background:#31363f; */
@@ -95,7 +97,7 @@ header{
     text-align:center;
     margin:0 auto;
     box-shadow:0 50px 100px rgba(0,0,0,0.5);
-    border-radius:10px;
+    border-radius:5px;
     background:#31363f;
 }
 
@@ -172,11 +174,13 @@ input:focus{
     box-shadow:0 50px 100px rgba(0,0,0,0.5);
     width:50vw;
     margin:0 auto;
-    border-radius:15px;
+    border-radius:5px;
     padding:2%;
     margin-bottom:10%;
     background:#31363f;
     font-family: "Source Code Pro", serif;
+    min-height:500px;
+    vertical-align:middle;
 }
 
 .basic_list{
@@ -205,7 +209,7 @@ input:focus{
     padding:0;
     margin:5px 0;
     position:relative;
-    border-radius:15px;
+    border-radius:5px;
     transition:all 0.3s;
     transform:scale(1);
     z-index:1;
@@ -254,13 +258,22 @@ input:focus{
 }
 
 footer{
+    z-index:10;
+    width: 100%;
+    Bottom: 0;
+    position: fixed;
     margin:0 auto;
     text-align:center;
     background-color:#222831;
 }
 
+footer h5{
+  margin:10px;
+  font-size:12px
+}
+
 .footer_icon{
-    width:20px;
+    width:16px;
     display:inline-block;
     vertical-align:middle;
 }
@@ -831,7 +844,7 @@ footer{
 }
 
 .login_card{
-  padding:6% 4%;
+  padding:10% 4%;
   margin:0;
   font-size:30px;
   text-align:center;

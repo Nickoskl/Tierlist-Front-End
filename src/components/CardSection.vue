@@ -38,9 +38,9 @@ defineProps({
 
     <LoadingCard :load="loadingDone" :errors="errors"/>
 
-    <TierCard v-for="card in list.slice(0, cardNum)" :tier_img="card.img" :title="card.name" />
+    <TierCard v-for="card in list.slice(0, cardNum)" :tier_img="card.img?card.img:card.background" :title="card.name" />
 
-    <TierCard v-if="moreClick" v-for="card in list.slice(cardNum, list.length)" :tier_img="card.img" :title="card.name" />
+    <TierCard v-if="moreClick" v-for="card in list.slice(cardNum, list.length)" :tier_img="card.img?card.img:card.background" :title="card.name" />
 
     <h2 @click="moreClick=true" v-if="!moreClick&&loadingDone && list.length>cardNum">MORE</h2>
 

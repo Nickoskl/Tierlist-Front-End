@@ -39,9 +39,9 @@ export const useTemplateStore = defineStore('TemplateStore',{
                     this.template.imgs=Array.from(resp.data.list_config.img_table)
                     
                     this.status=resp.status;
-                    this.loadingDone=true;
 
                 }
+                this.loadingDone=true;
 
             }
 
@@ -65,14 +65,14 @@ export const useTemplateStore = defineStore('TemplateStore',{
             }finally{
 
 
-                if(reps){
+                if(resp){
 
                     this.template=Array.from(resp.data);
 
 
-                    this.loadingDone=true;
                     this.status=resp.status;
                 }
+                this.loadingDone=true;
 
             }
         }

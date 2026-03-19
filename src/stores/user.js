@@ -51,10 +51,10 @@ export const useUserStore = defineStore('userStore',{
                         
                     });
                     console.log(resp.data);
-                    this.loadingDone=true;
+                    
                     this.status = resp.status;
                 }
-
+                this.loadingDone=true;
 
 
                 
@@ -131,10 +131,11 @@ export const useUserStore = defineStore('userStore',{
                             
                         }
                         this.status = resp.status;
-                        this.loadingDone=true;
                     // console.log(this.user[0])
                     
                 }
+
+                this.loadingDone=true;
 
 
             }
@@ -176,7 +177,7 @@ export const useUserStore = defineStore('userStore',{
 
 
                 }
-
+                this.loadingDone=true;
             }
 
 
@@ -214,7 +215,7 @@ export const useUserStore = defineStore('userStore',{
 
 
                 }
-
+                this.loadingDone=true;
             }
 
 
@@ -259,7 +260,7 @@ export const useUserStore = defineStore('userStore',{
 
 
                 }
-
+                this.loadingDone=true;
             }
 
 
@@ -295,6 +296,7 @@ export const useUserStore = defineStore('userStore',{
                     console.log(this.status);
 
                 }
+                this.loadingDone=true;
             }
         },
         reset(){

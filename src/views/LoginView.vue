@@ -8,7 +8,7 @@ import { ref } from 'vue';
 const {errors,status,loadingDone} = storeToRefs(useAuthStore());
 const {authenticate} = useAuthStore();
 
-const load = ref('');
+const loadStart = ref(false);
 
 
 const formData = reactive({
@@ -17,9 +17,10 @@ const formData = reactive({
 })
 
 const handleAuth=async() =>{
-    load.value = loadingDone.value;
+    loadStart.value = true;
     await authenticate(formData);
-    if(loadingDone.value){load.value=loadingDone.value}
+    if(loadingDone.value){loadStart.value=false}
+    console.log(loadingDone)
 
 }
 
@@ -34,12 +35,12 @@ const handleAuth=async() =>{
 
 
 
-<div class="login_card">
+<div v-if="loadingDone||!loadStart"  class="login_card">
             <h3 class="login_title">Login</h3>
             <div class="login_img">
                 <img src="../assets/icons/male-icon.svg" alt="">
             </div>
-            <div class="login_info">
+            <div v-if="!errors" class="login_info">
                 <form @submit.prevent=" handleAuth()">
                     <input required="true" v-model="formData.email" placeholder="Email " type="text" />
                     <input required="true" v-model="formData.password" placeholder="Password" type="password" />
@@ -47,7 +48,7 @@ const handleAuth=async() =>{
                 </form>
 
             </div>
-            <LoadingCard :load="load" :errors="errors"/>
+            <LoadingCard :load="!loadStart||loadingDone" :errors="errors"/>
         </div>
 
 

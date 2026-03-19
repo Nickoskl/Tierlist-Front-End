@@ -20,7 +20,7 @@ const props = defineProps({
         </div>
 
         <div v-if="props.errors">
-            <h3>Error: {{props.errors.data}}</h3>
+            <h3>Error {{ errors.status }}: {{props.errors.data}}</h3>
         </div>
 
 
