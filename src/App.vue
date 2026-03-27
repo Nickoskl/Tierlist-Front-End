@@ -5,6 +5,7 @@ import NavHeader from './components/NavHeader.vue';
 import AdminMenu from './components/AdminMenu.vue';
 import NavFooter from './components/NavFooter.vue';
 import Tutorial from './components/Tutorial.vue';
+import GithubLink from './components/GithubLink.vue';
 import { useAuthStore } from './stores/auth';
 import {storeToRefs} from 'pinia';
 import cookie from 'vue-cookies';
@@ -46,6 +47,7 @@ const {errors:authErrors,status:authStatus,userLoggedIn,userName,userID,userToke
     </div>
     <NavFooter />
     <Tutorial />
+    <GithubLink />
   </body>
   </html>
 </template>

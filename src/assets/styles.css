@@ -589,6 +589,8 @@ footer h5{
 .tier_level h5{
   font-size:20px;
   display:inline-block;
+  width:200px;
+  text-align:center;
 }
 
 .tier_level_img{
@@ -599,13 +601,30 @@ footer h5{
   z-index:0;
   transition:all 0.3s;
   position:relative;
+
 }
+
 
 .tier_level_img:hover{
   transform:scale(1.5);
   overflow:visible;
   transition:all 0.3s;
   z-index:1;
+}
+
+.tier_level_img img{
+  /* height:200px; */
+}
+
+.tier_images{
+  background:#222831;
+  margin-bottom:50px;
+  padding:30px;
+  border-radius:5px;
+}
+.drop_sortable{
+  min-width:40%;
+  min-height:50px;
 }
 
 .drop_sortable img{
@@ -924,9 +943,25 @@ footer h5{
   display:inline-flex;
   flex-wrap:wrap;
   justify-content:center;
+  width:100%;
+  position:relative;
+  min-height:100px;
 }
 
 #drag_sortable img{
   transform: translate(0, 0);
-  width:150px;
+  height:100px;
+}
+
+.drag_sortable_enable::before{
+  top:-50px;
+  text-align:center;
+  width:100%;
+  left:0px;
+  content:'You can now drag,drop and reorder the pictures in the tiers';
+  position:absolute;
+  font-size:20px;
+  letter-spacing:-1px;
+  opacity:0.6;
+  text-transform: uppercase;
 }

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
@@ -445,7 +445,7 @@
     <script>
 
 
-document.getElementsByTagName("body")[0].style.cursor = "url('./icons/pointer-arrow-icon.svg'), auto";
+// document.getElementsByTagName("body")[0].style.cursor = "url('./icons/pointer-arrow-icon.svg'), auto";
 
     var clickable = document.getElementsByClassName("pointer");
     var draggable = document.getElementsByClassName("drag");
@@ -952,14 +952,14 @@ for(var i = 0; i < draggable.length; i++) {
 
 //  ##############################HOVER
 
- for(var i = 0; i < clickable.length; i++) {
-    clickable[i].addEventListener('mouseover', () => {
-    document.getElementsByTagName("body")[0].style.cursor = "url('./icons/cursor-hand-icon.svg'), auto";
-  });
-  clickable[i].addEventListener('mouseleave', () => {
-    document.getElementsByTagName("body")[0].style.cursor = "url('./icons/pointer-arrow-icon.svg'), auto";
-  });
-};
+//  for(var i = 0; i < clickable.length; i++) {
+//     clickable[i].addEventListener('mouseover', () => {
+//     document.getElementsByTagName("body")[0].style.cursor = "url('./icons/cursor-hand-icon.svg'), auto";
+//   });
+//   clickable[i].addEventListener('mouseleave', () => {
+//     document.getElementsByTagName("body")[0].style.cursor = "url('./icons/pointer-arrow-icon.svg'), auto";
+//   });
+// };
 
 
     </script>

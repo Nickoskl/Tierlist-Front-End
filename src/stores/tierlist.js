@@ -48,6 +48,7 @@ export const useTierlistStore = defineStore('TierlistStore',{
                     this.tierlist.id=resp.data._id;
                     this.tierlist.placement=Array.from(resp.data.list_config.placement);
                     this.status=resp.status;
+                    this.tierlist.by=resp.data.by;
 
                 }
                 this.loadingDone=true;

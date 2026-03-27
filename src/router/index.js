@@ -26,7 +26,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
-      meta:{loggedIn : false}
+      meta:{loggedIn : false} 
     },
     {
       path: '/register',
@@ -58,7 +58,7 @@ const router = createRouter({
       component: UserTierlists,
     },
     {
-      path: '/tierlist/:id',
+      path: '/tierlist/:id?',
       name: 'tierlist',
       component: Tierlist,
     },
@@ -72,7 +72,7 @@ const router = createRouter({
 
 router.beforeEach(async(to,from)=>{
   const {loadingDone} = storeToRefs(useUserStore())
-  const {status,userLoggedIn} = storeToRefs(useAuthStore());
+  const {status,userLoggedIn,userName,userID,userSuper} = storeToRefs(useAuthStore());
   const {authenticate,resetAll} = useAuthStore();
   const {reset} = useUserStore();
   const {reset:resetTierlistData}=useTierlistStore()
