@@ -34,6 +34,7 @@ export const useTemplateStore = defineStore('TemplateStore',{
 
                     this.template.name=resp.data.name;
                     this.template.id=resp.data._id;
+                    this.template.background=resp.data.background;
                     this.template.description=resp.data.description;
                     this.template.levels=Array.from(resp.data.list_config.level_table)
                     this.template.imgs=Array.from(resp.data.list_config.img_table)

@@ -17,6 +17,10 @@ import { RouterLink } from 'vue-router';
             <img src="../assets/icons/male-icon.svg" alt="">
             <h5>Users</h5>
         </RouterLink>
+        <RouterLink :to="{name:'templates'}" class="pointer admin_menu_item">
+            <img src="../assets/icons/pencil-icon.svg" alt="">
+            <h5>Templates</h5>
+        </RouterLink>
     </div>
 
 </template>

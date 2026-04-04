@@ -6,6 +6,8 @@ import UserProfile from '../views/ProfileView.vue'
 import Users from '../views/UsersView.vue'
 import Register from '../views/RegisterVIew.vue'
 import Tierlist from '../views/TierlistVIew.vue'
+import Template from '../views/TemplateView.vue'
+import GlobalTemplates from '../views/GlobalTemplateView.vue'
 import UserTierlists from '../views/UserTierlists.vue'
 import { useAuthStore } from '@/stores/auth';
 import cookie from 'vue-cookies';
@@ -50,7 +52,7 @@ const router = createRouter({
       path: '/users',
       name: 'users',
       component: Users,
-      meta:{loggedIn:true}
+      meta:{loggedIn:true,onlySuper:true}
     },
     {
       path: '/tierlist/by/:id',
@@ -61,6 +63,18 @@ const router = createRouter({
       path: '/tierlist/:id?',
       name: 'tierlist',
       component: Tierlist,
+    },
+    {
+      path: '/template/:id?',
+      name: 'template',
+      component: Template,
+      meta:{loggedIn:true,onlySuper:true}
+    },
+    {
+      path: '/templates/',
+      name: 'templates',
+      component: GlobalTemplates,
+      meta:{loggedIn:true,onlySuper:true}
     },
     {
       path: '/:pathMatch(.*)*',
@@ -104,6 +118,10 @@ router.beforeEach(async(to,from)=>{
 
 
   if (typeof to.meta.loggedIn !== "undefined" && userLoggedIn.value!==to.meta.loggedIn){
+    return {name:'home'}
+  }
+
+  if (typeof to.meta.onlySuper !== "undefined" && userSuper.value!==to.meta.onlySuper){
     return {name:'home'}
   }
 

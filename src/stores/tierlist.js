@@ -49,6 +49,7 @@ export const useTierlistStore = defineStore('TierlistStore',{
                     this.tierlist.placement=Array.from(resp.data.list_config.placement);
                     this.status=resp.status;
                     this.tierlist.by=resp.data.by;
+                    this.tierlist.img=resp.data.img;
 
                 }
                 this.loadingDone=true;
@@ -120,6 +121,39 @@ export const useTierlistStore = defineStore('TierlistStore',{
 
 
 
+
+
+        },
+
+        async getTierTemplatesbyId(id){
+
+
+            var resp='';
+
+            try{
+                
+                axios.defaults.withCredentials=true;
+                resp=await axios.get(`${import.meta.env.VITE_API_ENDPOINT}${import.meta.env.VITE_API_GET_TEMPLATE_TIERLISTS}${id}`).catch((error)=>{
+                    this.errors=error.response;
+                    this.status=error.status;
+                })
+
+
+            }catch(error){
+
+                console.log('An error occured ', error.response ? error.response.data : error.message);
+
+            }finally{
+
+                if(resp){
+                    this.tierlist=Array.from(resp.data);
+
+                    this.status=resp.status;
+                }
+                this.loadingDone=true;
+
+
+            }
 
 
         }
